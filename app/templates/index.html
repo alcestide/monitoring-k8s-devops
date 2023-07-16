@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>System Usage Monitoring</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        .plotly-graph-div {
+            align: center;
+            margin: auto;
+            width: 50%;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="cpu-gauge"></div>
+        <div id="mem-gauge"></div>
+        <div id="disk-gauge"></div>
+        {% if message %}
+        <div class="alert alert-danger">{{ message }}</div>
+        {% endif %}
+    </div>
+    <script>
+        var cpuGauge = {
+            type: "indicator",
+            mode: "gauge+number",
+            value: {{ cpu_percent }},
+            gauge: {
+                axis: { range: [null, 100] },
+                bar: { color: "#5DBB63" },
+                backgroundcolor: "#fff",
+                borderwidth: 2,
+                bordercolor: "#ccc",
+                steps: [
+                    { range: [0, 50], color: "#00316e" },
+                    { range: [50, 85], color: "#00224b" },
+                    { range: [85, 100], color: "#001b3a" }
+                ],
+                threshold: {
+                    line: { color: "green", width: 10 },
+                    thickness: 0.5,
+                    value: {{ cpu_percent }}
+                }
+            }
+        };
+        
+        var memGauge = {
+            type: "indicator",
+            mode: "gauge+number",
+            value: {{ mem_percent }},
+            gauge: {
+                axis: { range: [null, 100] },
+                bar: { color: "#5DBB63" },
+                backgroundcolor: "#fff",
+                borderwidth: 2,
+                bordercolor: "#ccc",
+                steps: [
+                    { range: [0, 50], color: "#00316e" },
+                    { range: [50, 85], color: "#00224b" },
+                    { range: [85, 100], color: "#001b3a" }
+                ],
+                threshold: {
+                    line: { color: "green", width: 10 },
+                    thickness: 0.5,
+                    value: {{ mem_percent }}
+                }
+            }
+        };
+
+         var diskGauge = {
+            type: "indicator",
+            mode: "gauge+number",
+            value: {{ disk_percent }},
+            gauge: {
+                axis: { range: [null, 100] },
+                bar: { color: "#5DBB63" },
+                backgroundcolor: "#fff",
+                borderwidth: 2,
+                bordercolor: "#ccc",
+                steps: [
+                    { range: [0, 50], color: "#00316e" },
+                    { range: [50, 85], color: "#00224b" },
+                    { range: [85, 100], color: "#001b3a" }
+                ],
+                threshold: {
+                    line: { color: "green", width: 10 },
+                    thickness: 0.5,
+                    value: {{ disk_percent }}
+                }
+            }
+        };
+        var cpuGaugeLayout = { title: "CPU Usage" };
+        var memGaugeLayout = { title: "Memory Usage" };
+        var diskGaugeLayout = { title: "Disk Usage" };
+        
+        Plotly.newPlot('cpu-gauge', [cpuGauge], cpuGaugeLayout);
+        Plotly.newPlot('mem-gauge', [memGauge], memGaugeLayout);
+        Plotly.newPlot('disk-gauge', [diskGauge], diskGaugeLayout);
+    </script>
+</body>
+</html>
+
