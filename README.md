@@ -1,6 +1,6 @@
 # Monitoring-K8S-DevOps
 
-This project is a **Flask**-based web application that monitors **system usage** and displays it in a user-friendly interface. The application can be built using **Docker** and deployed on **Kubernetes**, and it can be hosted on the cloud, specifically on **AWS** (Amazon Web Services).
+This project is a **Flask**-based web application that monitors **system usage** and displays it in a user-friendly interface using **Plotly**. The application can be built using **Docker** and deployed on **Kubernetes**, and it can be hosted on the cloud, specifically on **AWS** (Amazon Web Services).
 
 # Introduction
 
